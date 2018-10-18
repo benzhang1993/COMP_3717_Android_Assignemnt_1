@@ -2,9 +2,12 @@ package ca.bcit.ass1.zhang_asai;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -79,7 +82,12 @@ public class MainActivity extends AppCompatActivity {
                         String regionName = c.getString("region");
                         String capital = c.getString("capital");
                         int population = c.getInt("population");
-                        int area = c.getInt("area");
+
+                        int area = 0;
+                        if (c.has("area")) {
+                            area = c.getInt("area");
+                        }
+
                         ArrayList<String> borders = new ArrayList<String>();
 
                         for (int j = 0; j < a.length(); j++) {

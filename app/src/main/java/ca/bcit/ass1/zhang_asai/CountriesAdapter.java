@@ -46,5 +46,11 @@ public class CountriesAdapter extends ArrayAdapter<Country> {
         // Return the completed view to render on screen
         return convertView;
     }
+    private View.OnClickListener coutryButton = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+        }
+    };
 }
 
