@@ -162,8 +162,10 @@ public class MainActivity extends AppCompatActivity {
             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long id) {
+                    Country c = countryList.get((int)id);
                     Intent intent = new Intent(MainActivity.this, CountryDetailActivity.class);
                     intent.putExtra("index", (int) id);
+                    intent.putExtra("country", );
                     startActivity(intent);
                 }
             });
