@@ -2,19 +2,22 @@ package ca.bcit.ass1.zhang_asai;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
+//public class CountriesAdapter extends ArrayAdapter<Country> {
 public class CountriesAdapter extends ArrayAdapter<Country> {
     Context _context;
-    public CountriesAdapter(Context context, ArrayList<Country> toons) {
-        super(context, 0, toons);
+    public CountriesAdapter(Context context, ArrayList<Country> countries) {
+        super(context, 0, countries);
         _context = context;
     }
 
@@ -46,11 +49,13 @@ public class CountriesAdapter extends ArrayAdapter<Country> {
         // Return the completed view to render on screen
         return convertView;
     }
-    private View.OnClickListener coutryButton = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-
-        }
-    };
+//    private View.OnClickListener coutryButton = new View.OnClickListener() {
+//    private View.OnClickListener coutryButton = new View.OnClickListener() {
+//        @Override
+//        public void onClick(View v) {
+//            Intent i = new Intent(MainActivity.this, CountryDetailActivity.class);
+//
+//        }
+//    };
 }
 
