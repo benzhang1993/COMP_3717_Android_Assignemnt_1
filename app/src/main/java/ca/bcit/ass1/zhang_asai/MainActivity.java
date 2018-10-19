@@ -3,6 +3,8 @@ package ca.bcit.ass1.zhang_asai;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -163,9 +165,11 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long id) {
                     Country c = countryList.get((int)id);
+//                    Parcelable p =
+//                    c.writeToParcel();
                     Intent intent = new Intent(MainActivity.this, CountryDetailActivity.class);
                     intent.putExtra("index", (int) id);
-                    intent.putExtra("country", );
+//                    intent.putExtra("country", );
                     startActivity(intent);
                 }
             });
