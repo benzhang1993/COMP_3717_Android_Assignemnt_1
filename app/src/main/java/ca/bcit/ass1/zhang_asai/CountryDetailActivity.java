@@ -12,8 +12,8 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ahmadrosid.svgloader.SvgLoader;
 
-import com.bumptech.glide.Glide;
 
 public class CountryDetailActivity extends AppCompatActivity {
 
@@ -27,9 +27,12 @@ public class CountryDetailActivity extends AppCompatActivity {
 
         ImageView photo = findViewById(R.id.countryFlag);
 //        ImageDownloaderTask task = new ImageDownloaderTask(photo);
-//        task.execute(country.getFlag());
+//        task.execute("https://restcountries.eu/data/afg.svg");
 
-        Glide.with(this).load(country.getFlag()).into(photo);
+        SvgLoader.pluck()
+                .with(this)
+                .setPlaceHolder(R.mipmap.ic_launcher, R.mipmap.ic_launcher)
+                .load(country.getFlag(), photo);
 
 
         TextView name = findViewById(R.id.countryDetailName);
