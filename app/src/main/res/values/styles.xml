@@ -8,4 +8,22 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="ImageView">
+        <item name = "android:layout_marginTop">10dp</item>
+        <item name = "android:layout_gravity">center</item>
+    </style>
+
+    <style name="CountryName">
+        <item name = "android:layout_marginLeft">20sp</item>
+        <item name = "android:textSize">30sp</item>
+        <item name = "android:layout_marginTop">10dp</item>
+        <item name = "android:textStyle">bold</item>
+        <item name = "android:textColor">#DAA520</item>
+    </style>
+
+    <style name="CountryDetail">
+        <item name = "android:layout_marginLeft">50sp</item>
+        <item name = "android:textColor">#800000</item>
+    </style>
+
 </resources>
