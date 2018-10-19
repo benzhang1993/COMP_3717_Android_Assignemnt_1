@@ -1,18 +1,23 @@
 package ca.bcit.ass1.zhang_asai;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
+import android.support.v7.widget.ShareActionProvider;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -25,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private static String FILTERS = "name;capital;region;population;area;borders;flag";
     private static String REQUEST_URL = SERVICE_URL + FILTER_HEADER + FILTERS;
     private ArrayList<Country> countryList;
+    private ShareActionProvider mShareActionProvider;
 
     // test commit
     @Override
@@ -36,6 +42,38 @@ public class MainActivity extends AppCompatActivity {
         lv = (ListView) findViewById(R.id.countryList);
         new GetContacts().execute();
     }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+
+        // Locate MenuItem with ShareActionProvider
+        MenuItem item = menu.findItem(R.id.share);
+
+        // Fetch and store ShareActionProvider
+        mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
+        setShareActionIntent("Sending location data.");
+        return true;
+    }
+
+    // Call to update the share intent
+    private void setShareActionIntent(String text) {
+        Intent i = new Intent(Intent.ACTION_SEND);
+        i.setType("text/plain");
+        i.putExtra(Intent.EXTRA_TEXT, text);
+        mShareActionProvider.setShareIntent(i);
+    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch(item.getItemId()) {
+//            case R.id.expandable:
+//
+//
+//        }
+//    }
+
     /**
      * Async task class to get json by making HTTP call
      */
@@ -52,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
             pDialog.show();
 
         }
+
 
         @Override
         protected Void doInBackground(Void... arg0) {
