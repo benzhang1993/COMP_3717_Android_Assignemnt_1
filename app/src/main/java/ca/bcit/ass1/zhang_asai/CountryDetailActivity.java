@@ -12,8 +12,8 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ahmadrosid.svgloader.SvgLoader;
 
-//import com.bumptech.glide.Glide;
 
 public class CountryDetailActivity extends AppCompatActivity {
 
@@ -22,34 +22,6 @@ public class CountryDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_country_detail);
 
-        int countryIndex = (Integer) getIntent().getExtras().get("index");
-//        Country country = (Country) getIntent().getExtras().get("country");
-
-        // Populate the country image
-//        ImageView photo = findViewById(R.id.photo);
-//        photo.setImageResource(food.getImageResourceId());
-//                photo.setContentDescription(food.getDescription());
-
-        // Populate the country name
-//        TextView name = findViewById(R.id.countryName);
-//        name.setText(country.getName());
-//
-//        TextView category = findViewById(R.id.category);
-//        String categoryText = "Category: " + food.getCategory();
-//        category.setText(categoryText);
-//
-//        // populate the country description
-//        TextView origin = findViewById(R.id.countryOfOrigin);
-//        String originText = "Origin: " + food.getCountryOfOrigin();
-//        origin.setText(originText);
-//
-//        TextView unit = findViewById(R.id.unit);
-//        String unitText = "Unit: " + food.getUnit();
-//        unit.setText(unitText);
-//
-//        TextView price = findViewById(R.id.price);
-//        String priceText = "Price: " + food.getPrice();
-//        price.setText(priceText);
         Country country = (Country) getIntent().getExtras().get("country");
 
 
@@ -57,7 +29,10 @@ public class CountryDetailActivity extends AppCompatActivity {
 //        ImageDownloaderTask task = new ImageDownloaderTask(photo);
 //        task.execute(country.getFlag());
 
-//        Glide.with(this).load(country.getFlag()).into(photo);
+        SvgLoader.pluck()
+                .with(this)
+                .setPlaceHolder(R.mipmap.ic_launcher, R.mipmap.ic_launcher)
+                .load(country.getFlag(), photo);
 
 
         TextView name = findViewById(R.id.countryDetailName);
