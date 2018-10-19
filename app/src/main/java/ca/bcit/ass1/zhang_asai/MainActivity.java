@@ -3,12 +3,15 @@ package ca.bcit.ass1.zhang_asai;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -41,6 +44,9 @@ public class MainActivity extends AppCompatActivity {
         countryList = new ArrayList<Country>();
         lv = (ListView) findViewById(R.id.countryList);
         new GetContacts().execute();
+
+
+
     }
 
 
@@ -118,7 +124,12 @@ public class MainActivity extends AppCompatActivity {
                         String regionName = c.getString("region");
                         String capital = c.getString("capital");
                         int population = c.getInt("population");
-                        int area = c.getInt("area");
+
+                        int area = 0;
+                        if (c.has("area")) {
+                            area = c.getInt("area");
+                        }
+
                         ArrayList<String> borders = new ArrayList<String>();
 
                         for (int j = 0; j < a.length(); j++) {
@@ -184,6 +195,18 @@ public class MainActivity extends AppCompatActivity {
 
             // Attach the adapter to a ListView
             lv.setAdapter(adapter);
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long id) {
+                    Country c = countryList.get((int)id);
+//                    Parcelable p =
+//                    c.writeToParcel();
+                    Intent intent = new Intent(MainActivity.this, CountryDetailActivity.class);
+                    intent.putExtra("index", (int) id);
+//                    intent.putExtra("country", );
+                    startActivity(intent);
+                }
+            });
         }
     }
 }
