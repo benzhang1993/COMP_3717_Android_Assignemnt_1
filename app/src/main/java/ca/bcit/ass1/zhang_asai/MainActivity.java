@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v7.widget.ShareActionProvider;
 
@@ -49,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        TextView student1 = findViewById(R.id.student1);
+        TextView student2 = findViewById(R.id.student2);
         countryList = new ArrayList<Country>();
         lv = (ListView) findViewById(R.id.continentsList);
         new GetContacts().execute();

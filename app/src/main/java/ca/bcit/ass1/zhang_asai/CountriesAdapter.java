@@ -38,13 +38,13 @@ public class CountriesAdapter extends ArrayAdapter<Country> {
         tvCountryName.setText(country.getName());
         tvRegionName.setText(country.getRegion());
 
-        ImageView imgOnePhoto = (ImageView) convertView.findViewById(R.id.thumbImage);
+//        ImageView imgOnePhoto = (ImageView) convertView.findViewById(R.id.thumbImage);
         //DownloadImageTask dit = new DownloadImageTask(_context, imgOnePhoto);
         //dit.execute(toon.getPicture());
-        if (country.getFlag() != null) {
+//        if (country.getFlag() != null) {
             // ImageDownloaderTask is thread, async
-            new ImageDownloaderTask(imgOnePhoto).execute(country.getFlag());
-        }
+//            new ImageDownloaderTask(imgOnePhoto).execute(country.getFlag());
+//        }
 
         // Return the completed view to render on screen
         return convertView;
