@@ -21,14 +21,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
-public class MainActivity extends AppCompatActivity {
+public class CountryListActivity extends AppCompatActivity {
     private String TAG = MainActivity.class.getSimpleName();
     private ProgressDialog pDialog;
     private ListView lv;
@@ -38,20 +33,44 @@ public class MainActivity extends AppCompatActivity {
     private static String FILTERS = "name;capital;region;population;area;borders;flag";
     private static String REQUEST_URL = SERVICE_URL + FILTER_HEADER + FILTERS;
     private ArrayList<Country> countryList;
-//    private ArrayList<String> regionList;
-    private Set<String> regionList = new HashSet<String>();
-    private ArrayList<String> regionArrayList;
     private ShareActionProvider mShareActionProvider;
 
     // test commit
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_country_list);
 
-        countryList = new ArrayList<Country>();
-        lv = (ListView) findViewById(R.id.continentsList);
-        new GetContacts().execute();
+//        countryList = new ArrayList<Country>();
+//        Bundle countriesData = getIntent().getParcelableArrayListExtra("countries.data");
+//        countryList = countriesData.getParcelableArrayList("countries.list");
+        countryList = getIntent().getParcelableArrayListExtra("countries");
+        Log.d("test", countryList.get(0).getName());
+
+
+        lv = (ListView) findViewById(R.id.countryList);
+        if (lv == null) {
+            Log.d("aaa","null1");
+        }
+        CountriesAdapter adapter = new CountriesAdapter(CountryListActivity.this, countryList);
+        if (adapter == null) {
+            Log.d("bbb","null2");
+
+        }
+        lv.setAdapter(adapter);
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long id) {
+                    Country c = countryList.get((int)id);
+//                    Parcelable p =
+//                    c.writeToParcel();
+                    Intent intent = new Intent(CountryListActivity.this, CountryDetailActivity.class);
+                    intent.putExtra("index", (int) id);
+                    intent.putExtra("country", c);
+                    startActivity(intent);
+                }
+        });
+//        new GetContacts().execute();
 
 
 
@@ -98,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
             // Showing progress dialog
-            pDialog = new ProgressDialog(MainActivity.this);
+            pDialog = new ProgressDialog(CountryListActivity.this);
             pDialog.setMessage("Please wait...");
             pDialog.setCancelable(false);
             pDialog.show();
@@ -158,7 +177,6 @@ public class MainActivity extends AppCompatActivity {
 
                         // adding contact to contact list
                         countryList.add(country);
-                        regionList.add(regionName);
                     }
                 } catch (final JSONException e) {
                     Log.e(TAG, "Json parsing error: " + e.getMessage());
@@ -186,7 +204,6 @@ public class MainActivity extends AppCompatActivity {
                 });
 
             }
-            regionList.remove("");
 
             return null;
         }
@@ -201,39 +218,23 @@ public class MainActivity extends AppCompatActivity {
 
             //Toon[] toonArray = toonList.toArray(new Toon[toonList.size()]);
 
-//            CountriesAdapter adapter = new CountriesAdapter(MainActivity.this, countryList);
-//            ArrayList<String> regionArrayList = new ArrayList<String>(regionList);
-            regionArrayList = new ArrayList<String>(regionList);
-            Collections.sort(regionArrayList, String.CASE_INSENSITIVE_ORDER);
-            ContinentsAdapter adapter = new ContinentsAdapter(MainActivity.this, regionArrayList);
+            CountriesAdapter adapter = new CountriesAdapter(CountryListActivity.this, countryList);
 
             // Attach the adapter to a ListView
             lv.setAdapter(adapter);
             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long id) {
-//                    Country c = countryList.get((int)id);
-                    String continentName = regionArrayList.get((int) id);
-
-                    ArrayList<Country> countriesInContinent = new ArrayList<Country>();
-                    for(Country country : countryList) {
-                        if (continentName.equals(country.getRegion())) {
-                            countriesInContinent.add(country);
-                        }
-                    }
-
-//                    Bundle countriesData = new Bundle();
-//                    countriesData.putParcelableArrayList("countries.list", countriesInContinent);
+                    Country c = countryList.get((int)id);
 //                    Parcelable p =
 //                    c.writeToParcel();
-                    Intent intent = new Intent(MainActivity.this, CountryListActivity.class);
+                    Intent intent = new Intent(CountryListActivity.this, CountryDetailActivity.class);
                     intent.putExtra("index", (int) id);
-//                    intent.putExtra("continentName", continentName);
-//                    intent.putExtra("countries.data", countriesData);
-                    intent.putExtra("countries", countriesInContinent);
+                    intent.putExtra("country", c);
                     startActivity(intent);
                 }
             });
         }
     }
 }
+

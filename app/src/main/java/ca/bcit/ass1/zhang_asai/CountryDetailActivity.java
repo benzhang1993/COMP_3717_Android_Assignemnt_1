@@ -12,7 +12,6 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.ahmadrosid.svgloader.SvgLoader;
 
 
 public class CountryDetailActivity extends AppCompatActivity {
@@ -27,7 +26,7 @@ public class CountryDetailActivity extends AppCompatActivity {
 
         ImageView photo = findViewById(R.id.countryFlag);
 //        ImageDownloaderTask task = new ImageDownloaderTask(photo);
-//        task.execute("https://restcountries.eu/data/afg.svg");
+//        task.execute(country.getFlag());
 
         SvgLoader.pluck()
                 .with(this)
