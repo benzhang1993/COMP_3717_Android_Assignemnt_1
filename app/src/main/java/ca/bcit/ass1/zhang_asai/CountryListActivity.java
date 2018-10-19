@@ -58,6 +58,18 @@ public class CountryListActivity extends AppCompatActivity {
 
         }
         lv.setAdapter(adapter);
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long id) {
+                    Country c = countryList.get((int)id);
+//                    Parcelable p =
+//                    c.writeToParcel();
+                    Intent intent = new Intent(CountryListActivity.this, CountryDetailActivity.class);
+                    intent.putExtra("index", (int) id);
+                    intent.putExtra("country", c);
+                    startActivity(intent);
+                }
+        });
 //        new GetContacts().execute();
 
 
