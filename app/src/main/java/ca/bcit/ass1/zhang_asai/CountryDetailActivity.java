@@ -3,6 +3,7 @@ package ca.bcit.ass1.zhang_asai;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,7 +15,9 @@ public class CountryDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_country_detail);
 
         int countryIndex = (Integer) getIntent().getExtras().get("index");
-        Country country = null;
+        Country country = (Country) getIntent().getExtras().get("country");
+        Log.d("test", country.getName());
+        Log.d("test", country.getRegion());
 
         // Populate the country image
 //        ImageView photo = findViewById(R.id.photo);

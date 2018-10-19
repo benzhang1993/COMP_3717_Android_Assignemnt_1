@@ -203,7 +203,7 @@ public class MainActivity extends AppCompatActivity {
 //                    c.writeToParcel();
                     Intent intent = new Intent(MainActivity.this, CountryDetailActivity.class);
                     intent.putExtra("index", (int) id);
-//                    intent.putExtra("country", );
+                    intent.putExtra("country", c);
                     startActivity(intent);
                 }
             });
