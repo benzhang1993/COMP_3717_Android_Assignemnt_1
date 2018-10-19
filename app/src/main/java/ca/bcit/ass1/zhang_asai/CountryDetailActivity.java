@@ -12,6 +12,7 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ahmadrosid.svgloader.SvgLoader;
 
 
 public class CountryDetailActivity extends AppCompatActivity {
