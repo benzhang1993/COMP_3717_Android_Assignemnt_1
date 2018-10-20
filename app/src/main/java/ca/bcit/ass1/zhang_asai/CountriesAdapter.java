@@ -31,10 +31,8 @@ public class CountriesAdapter extends ArrayAdapter<Country> {
         }
         // Lookup view for data population
         TextView tvCountryName = (TextView) convertView.findViewById(R.id.countryName);
-        TextView tvRegionName = (TextView) convertView.findViewById(R.id.regionName);
         // Populate the data into the template view using the data object
         tvCountryName.setText(country.getName());
-        tvRegionName.setText(country.getRegion());
 
         // Return the completed view to render on screen
         return convertView;
