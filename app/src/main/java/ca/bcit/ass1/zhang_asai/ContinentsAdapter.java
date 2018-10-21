@@ -9,8 +9,13 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import java.util.ArrayList;
 
+/**
+ * Adapter class for continents
+ */
 public class ContinentsAdapter extends ArrayAdapter<String> {
     Context _context;
+
+    // Constructor
     public ContinentsAdapter(Context context, ArrayList<String> continents) {
         super(context, 0, continents);
         _context = context;
@@ -25,6 +30,7 @@ public class ContinentsAdapter extends ArrayAdapter<String> {
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_row_layout, parent, false);
         }
+
         // Lookup view for data population
         TextView tvRegionName = (TextView) convertView.findViewById(R.id.regionName);
         // Populate the data into the template view using the data object

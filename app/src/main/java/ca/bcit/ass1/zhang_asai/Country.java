@@ -4,6 +4,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import java.util.List;
 
+/**
+ * Country class
+ */
 public class Country implements Parcelable {
     private String flag;
 

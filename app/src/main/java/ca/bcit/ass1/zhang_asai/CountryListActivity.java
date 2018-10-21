@@ -13,6 +13,9 @@ import android.widget.ListView;
 import android.support.v7.widget.ShareActionProvider;
 import java.util.ArrayList;
 
+/**
+ * Activity for Country list
+ */
 public class CountryListActivity extends AppCompatActivity {
     private String TAG = MainActivity.class.getSimpleName();
     private ProgressDialog pDialog;
@@ -32,12 +35,15 @@ public class CountryListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_country_list);
 
+        // Retrieve passed data
         countryList = getIntent().getParcelableArrayListExtra("countries");
 
         CountriesAdapter adapter = new CountriesAdapter(CountryListActivity.this, countryList);
 
         lv = (ListView) findViewById(R.id.countryList);
         lv.setAdapter(adapter);
+
+        // Listener for each list item
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long id) {
@@ -60,6 +66,7 @@ public class CountryListActivity extends AppCompatActivity {
         // Fetch and store ShareActionProvider
         mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
         setShareActionIntent("Sending location data.");
+
         return true;
     }
 

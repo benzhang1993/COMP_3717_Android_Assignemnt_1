@@ -10,8 +10,13 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+/**
+ * Adapter class for Countries
+ */
 public class CountriesAdapter extends ArrayAdapter<Country> {
     Context _context;
+
+    // Constructor
     public CountriesAdapter(Context context, ArrayList<Country> countries) {
         super(context, 0, countries);
         _context = context;
@@ -29,6 +34,7 @@ public class CountriesAdapter extends ArrayAdapter<Country> {
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_row_layout, parent, false);
         }
+
         // Lookup view for data population
         TextView tvCountryName = (TextView) convertView.findViewById(R.id.countryName);
         // Populate the data into the template view using the data object

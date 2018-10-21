@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         TextView student2 = findViewById(R.id.student2);
         countryList = new ArrayList<Country>();
         lv = (ListView) findViewById(R.id.continentsList);
+
         new GetContacts().execute();
     }
 
@@ -93,37 +94,38 @@ public class MainActivity extends AppCompatActivity {
             // Making a request to url and getting response
             String jsonStr = sh.makeServiceCall(REQUEST_URL);
 
-            Log.e(TAG, "Response from url: " + jsonStr);
-
             if (jsonStr != null) {
                 try {
                     // Getting JSON Array node
                     JSONArray countryJsonArray = new JSONArray(jsonStr);
 
-                    // looping through All Contacts
+                    // looping through All Countries
                     for (int i = 0; i < countryJsonArray.length(); i++) {
                         JSONObject c = countryJsonArray.getJSONObject(i);
-                        JSONArray a = c.getJSONArray("borders");
 
+                        // Get country attributes
+                        JSONArray a = c.getJSONArray("borders");
                         String flagURL = c.getString("flag");
                         String countryName = c.getString("name");
                         String regionName = c.getString("region");
                         String capital = c.getString("capital");
                         int population = c.getInt("population");
 
+                        // If a JSON datum does not have area field, skip it
                         int area = 0;
                         if (c.has("area")) {
                             area = c.getInt("area");
                         }
 
+                        // Retrieve borders
                         ArrayList<String> borders = new ArrayList<String>();
-
                         for (int j = 0; j < a.length(); j++) {
                             borders.add(a.getString(j));
                         }
 
                         Country country = new Country();
 
+                        // Set attributes to a country instance
                         country.setFlag(flagURL);
                         country.setName(countryName);
                         country.setRegion(regionName);
@@ -132,6 +134,7 @@ public class MainActivity extends AppCompatActivity {
                         country.setArea(area);
                         country.setBorders(borders);
 
+                        // Store countries to each list
                         countryList.add(country);
                         regionList.add(regionName);
                     }
@@ -173,6 +176,7 @@ public class MainActivity extends AppCompatActivity {
             if (pDialog.isShowing())
                 pDialog.dismiss();
 
+            // Create adapter for continents. Sort regionList in ascending order before it.
             regionArrayList = new ArrayList<String>(regionList);
             Collections.sort(regionArrayList, String.CASE_INSENSITIVE_ORDER);
             ContinentsAdapter adapter = new ContinentsAdapter(MainActivity.this, regionArrayList);
@@ -184,6 +188,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long id) {
                     String continentName = regionArrayList.get((int) id);
 
+                    // Retrieve countries exist in the chosen continent
                     ArrayList<Country> countriesInContinent = new ArrayList<Country>();
                     for(Country country : countryList) {
                         if (continentName.equals(country.getRegion())) {

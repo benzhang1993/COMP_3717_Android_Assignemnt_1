@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        COMP3717_Android_Assignment1 {
+            keyAlias 'key0'
+            keyPassword '123456'
+            storeFile file('/Users/isheik/Documents/android_key/COMP3717_Android_Assignment_Keys')
+            storePassword '123456'
+        }
+    }
     compileSdkVersion 28
     defaultConfig {
         applicationId "ca.bcit.ass1.zhang_asai"
@@ -14,6 +22,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.COMP3717_Android_Assignment1
         }
     }
 }
