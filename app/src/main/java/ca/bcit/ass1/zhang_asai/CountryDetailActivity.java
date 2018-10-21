@@ -1,22 +1,15 @@
 package ca.bcit.ass1.zhang_asai;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.PictureDrawable;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.ahmadrosid.svgloader.SvgLoader;
 
-
+/**
+ * Activity for country detail.
+ */
 public class CountryDetailActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,17 +17,15 @@ public class CountryDetailActivity extends AppCompatActivity {
 
         Country country = (Country) getIntent().getExtras().get("country");
 
-
         ImageView photo = findViewById(R.id.countryFlag);
-//        ImageDownloaderTask task = new ImageDownloaderTask(photo);
-//        task.execute(country.getFlag());
 
+        // Uses SVG Loader to load vector image
         SvgLoader.pluck()
                 .with(this)
                 .setPlaceHolder(R.mipmap.ic_launcher, R.mipmap.ic_launcher)
                 .load(country.getFlag(), photo);
 
-
+        // Set each field datum
         TextView name = findViewById(R.id.countryDetailName);
         name.setText(country.getName());
 

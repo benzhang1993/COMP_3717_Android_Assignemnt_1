@@ -23,6 +23,9 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Main activity
+ */
 public class MainActivity extends AppCompatActivity {
     private String TAG = MainActivity.class.getSimpleName();
     private ProgressDialog pDialog;
