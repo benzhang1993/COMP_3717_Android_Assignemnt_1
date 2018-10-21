@@ -7,51 +7,51 @@
     tools:context=".CountryDetailActivity"
     android:orientation="vertical">
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-    <ImageView
-        android:id="@+id/countryFlag"
-        android:layout_width="190dp"
-        android:layout_height="190dp"
-        style = "@style/ImageView"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <ImageView
+            android:id="@+id/countryFlag"
+            android:layout_width="@dimen/flag_width"
+            android:layout_height="@dimen/flag_height"
+            style = "@style/ImageView"/>
 
-    <TextView
-        android:id="@+id/countryDetailName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style = "@style/CountryName"/>
+        <TextView
+            android:id="@+id/countryDetailName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style = "@style/CountryName"/>
 
-    <TextView
-        android:id="@+id/countryCapital"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style = "@style/CountryDetail"/>
+        <TextView
+            android:id="@+id/countryCapital"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style = "@style/CountryDetail"/>
 
-    <TextView
-        android:id="@+id/countryRegion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style = "@style/CountryDetail"/>
+        <TextView
+            android:id="@+id/countryRegion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style = "@style/CountryDetail"/>
 
-    <TextView
-        android:id="@+id/countryPopulation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style = "@style/CountryDetail"/>
+        <TextView
+            android:id="@+id/countryPopulation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style = "@style/CountryDetail"/>
 
-    <TextView
-        android:id="@+id/countryArea"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style = "@style/CountryDetail"/>
+        <TextView
+            android:id="@+id/countryArea"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style = "@style/CountryDetail"/>
 
-    <TextView
-        android:id="@+id/countryBorders"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style = "@style/CountryDetail"/>
-</LinearLayout>
+        <TextView
+            android:id="@+id/countryBorders"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style = "@style/CountryDetail"/>
+    </LinearLayout>
 
 </ScrollView>
