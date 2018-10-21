@@ -3,8 +3,6 @@ package ca.bcit.ass1.zhang_asai;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,49 +12,44 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v7.widget.ShareActionProvider;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
     private String TAG = MainActivity.class.getSimpleName();
     private ProgressDialog pDialog;
     private ListView lv;
+
     // URL to get contacts JSON
     private static String SERVICE_URL = "https://restcountries.eu/rest/v2/all";
     private static String FILTER_HEADER = "?fields=";
     private static String FILTERS = "name;capital;region;population;area;borders;flag";
     private static String REQUEST_URL = SERVICE_URL + FILTER_HEADER + FILTERS;
+
     private ArrayList<Country> countryList;
-//    private ArrayList<String> regionList;
     private Set<String> regionList = new HashSet<String>();
     private ArrayList<String> regionArrayList;
     private ShareActionProvider mShareActionProvider;
 
-    // test commit
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        TextView student1 = findViewById(R.id.student1);
+        TextView student2 = findViewById(R.id.student2);
         countryList = new ArrayList<Country>();
         lv = (ListView) findViewById(R.id.continentsList);
         new GetContacts().execute();
-
-
-
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -78,22 +71,11 @@ public class MainActivity extends AppCompatActivity {
         i.putExtra(Intent.EXTRA_TEXT, text);
         mShareActionProvider.setShareIntent(i);
     }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch(item.getItemId()) {
-//            case R.id.expandable:
-//
-//
-//        }
-//    }
 
     /**
      * Async task class to get json by making HTTP call
      */
-    // Array of empty Void
     private class GetContacts extends AsyncTask<Void, Void, Void> {
-
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -102,9 +84,7 @@ public class MainActivity extends AppCompatActivity {
             pDialog.setMessage("Please wait...");
             pDialog.setCancelable(false);
             pDialog.show();
-
         }
-
 
         @Override
         protected Void doInBackground(Void... arg0) {
@@ -117,8 +97,6 @@ public class MainActivity extends AppCompatActivity {
 
             if (jsonStr != null) {
                 try {
-                    //JSONObject jsonObj = new JSONObject(jsonStr);
-
                     // Getting JSON Array node
                     JSONArray countryJsonArray = new JSONArray(jsonStr);
 
@@ -144,10 +122,8 @@ public class MainActivity extends AppCompatActivity {
                             borders.add(a.getString(j));
                         }
 
-                        // tmp hash map for single contact
                         Country country = new Country();
 
-                        // adding each child node to HashMap key => value
                         country.setFlag(flagURL);
                         country.setName(countryName);
                         country.setRegion(regionName);
@@ -156,7 +132,6 @@ public class MainActivity extends AppCompatActivity {
                         country.setArea(area);
                         country.setBorders(borders);
 
-                        // adding contact to contact list
                         countryList.add(country);
                         regionList.add(regionName);
                     }
@@ -171,7 +146,6 @@ public class MainActivity extends AppCompatActivity {
                                     .show();
                         }
                     });
-
                 }
             } else {
                 Log.e(TAG, "Couldn't get json from server.");
@@ -199,10 +173,6 @@ public class MainActivity extends AppCompatActivity {
             if (pDialog.isShowing())
                 pDialog.dismiss();
 
-            //Toon[] toonArray = toonList.toArray(new Toon[toonList.size()]);
-
-//            CountriesAdapter adapter = new CountriesAdapter(MainActivity.this, countryList);
-//            ArrayList<String> regionArrayList = new ArrayList<String>(regionList);
             regionArrayList = new ArrayList<String>(regionList);
             Collections.sort(regionArrayList, String.CASE_INSENSITIVE_ORDER);
             ContinentsAdapter adapter = new ContinentsAdapter(MainActivity.this, regionArrayList);
@@ -212,7 +182,6 @@ public class MainActivity extends AppCompatActivity {
             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long id) {
-//                    Country c = countryList.get((int)id);
                     String continentName = regionArrayList.get((int) id);
 
                     ArrayList<Country> countriesInContinent = new ArrayList<Country>();
@@ -222,15 +191,10 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
 
-//                    Bundle countriesData = new Bundle();
-//                    countriesData.putParcelableArrayList("countries.list", countriesInContinent);
-//                    Parcelable p =
-//                    c.writeToParcel();
                     Intent intent = new Intent(MainActivity.this, CountryListActivity.class);
                     intent.putExtra("index", (int) id);
-//                    intent.putExtra("continentName", continentName);
-//                    intent.putExtra("countries.data", countriesData);
                     intent.putExtra("countries", countriesInContinent);
+
                     startActivity(intent);
                 }
             });

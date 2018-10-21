@@ -12,8 +12,6 @@ import java.lang.ref.WeakReference;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-// AsyncTask<Input, progress, output>
-// If u want to display image on View, then it has to be Bitmap
 class ImageDownloaderTask extends AsyncTask<String, Void, Bitmap> {
     /*
     A weak reference, simply put, is a reference that isn't strong enough to force an object to remain in memory.
