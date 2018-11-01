@@ -20,7 +20,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".CountryDetailActivity" />
-        <activity android:name=".CountryListActivity"></activity>
+        <activity android:name=".CountryListActivity" />
+        <activity android:name=".MyDeviceInfoActivity"></activity>
     </application>
 
 </manifest>

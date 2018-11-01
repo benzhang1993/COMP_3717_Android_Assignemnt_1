@@ -76,6 +76,20 @@ public class MainActivity extends AppCompatActivity {
         mShareActionProvider.setShareIntent(i);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.mydevice:
+                Intent i = new Intent(this, MyDeviceInfoActivity.class);
+                startActivity(i);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
+
     /**
      * Async task class to get json by making HTTP call
      */
